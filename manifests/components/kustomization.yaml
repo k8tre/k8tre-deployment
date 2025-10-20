@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1  # <-- Component notation
+kind: Component
+
+patches:
+  - target:
+      kind: ApplicationSet
+      name: cert-manager
+    patch: |-
+      - op: replace
+        path: /spec/generators/0/matrix/generators/0/git/repoURL
+        value: https://github.com/k8tre/k8tre.git
+      - op: replace
+        path: /spec/template/spec/source/repoURL
+        value: https://github.com/k8tre/k8tre.git
+      - op: replace
+        path: /spec/generators/0/matrix/generators/0/git/revision
+        value: main
+      - op: replace
+        path: /spec/template/spec/source/targetRevision
+        value: main

@@ -1,0 +1,37 @@
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root-app-of-apps
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://github.com/k8tre/k8tre.git
+      targetRevision: main # change this
+      path: appsets
+      kustomize:
+        commonLabels:
+          app.kubernetes.io/managed-by: argocd
+        commonAnnotations:
+          app.kubernetes.io/part-of: k8tre
+    - repoURL: https://github.com/k8tre/k8tre-deployment.git # change this
+      targetRevision: main # change this if needed
+      path: manifests
+      kustomize:
+        components:
+          - components
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
+  info:
+    - name: K8TRE App of Apps
+      value: "https://github.com/k8tre/k8tre"
+    - name: K8TRE Documentation
+      value: "https://k8tre.github.io/k8tre/"
