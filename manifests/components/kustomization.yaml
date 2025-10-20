@@ -8,10 +8,10 @@ patches:
     patch: |-
       - op: replace
         path: /spec/generators/0/matrix/generators/0/git/repoURL
-        value: https://github.com/k8tre/k8tre.git
+        value: https://github.com/karectl/karectl.git
       - op: replace
         path: /spec/template/spec/source/repoURL
-        value: https://github.com/k8tre/k8tre.git
+        value: https://github.com/karectl/karectl.git
       - op: replace
         path: /spec/generators/0/matrix/generators/0/git/revision
         value: main
