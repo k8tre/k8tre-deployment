@@ -1,8 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1alpha1  # <-- Component notation
 kind: Component
 
-patches:
+patchesJson6902:
   - target:
+      version: v1
       kind: ApplicationSet
       name: cert-manager
     patch: |-
